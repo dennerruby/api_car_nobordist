@@ -1,12 +1,12 @@
 class CarsController < ApplicationController
   before_action :set_car, only: [:show, :update, :destroy]
  
-  before_action :require_authorization!, only: [:show, :update, :destroy]
+  # before_action :require_authorization!, only: [:show, :update, :destroy]
     
    # GET /api/v1/cars/1
   def index
   
-    @cars = current_user.cars
+    @cars = Car.all
   
     render json: @cars
   
@@ -14,13 +14,13 @@ class CarsController < ApplicationController
   
   def show
   
-    render json: @cars
+    render json: @car
   
   end
 
   def create
   
-    @car = Car.new(car_params.merge(car: current_user))
+    @car = Car.new(car_params)
   
     if @car.save
   
@@ -64,15 +64,15 @@ class CarsController < ApplicationController
   
     def set_car
   
-      @car = car.find(params[:id])
+      @car = Car.find(params[:id])
   
     end
   
     # Only allow a trusted parameter "white list" through.
   
-    def contact_params
+    def car_params
   
-      params.require(:car).permit(:marca, :veiculo, :ano, :descricao)
+      params.require(:car).permit(:marca, :veiculo, :ano, :descricao, :vendido)
   
     end
   
@@ -86,5 +86,5 @@ class CarsController < ApplicationController
   
    # end
   
- end
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 end
